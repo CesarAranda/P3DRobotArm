@@ -82,7 +82,7 @@ Cambios:
   - Final de carrera en Eje Z
   - Brazo superior con Orificios para pasaje de cables
   - Anillo de suplemento para cada mordaza de la pinza
-  . Pinza adicinal con forma cónica
+  - Pinza adicinal con forma cónica
   - Pinza adicional con sensores de presión y fin de carrera
   - Gabinete principal para la alojar la electrónica de control
   - Mini gabinete para alojar electrónica complementaria de la pinza
