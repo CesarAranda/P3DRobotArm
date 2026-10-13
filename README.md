@@ -65,12 +65,15 @@ Cambios:
     sin necesidad de tener el hardware montado.
 
 * Versiones beta 0.62, 0.63, 0.7 y 0.8 (desde 05-2020).
+
   Derivación de la version V0.61 del trabajo de Leo Yeung [20sffactory]
   (más información en https://www.20sffactory.com)
+
   Se adopta el esquema de objetos con los módulos:
       byj_gripper.h, command.h, config.h, endstop.h, equipment.h,
       fanControl.h, gripper.h, interpolation.h, logger.h, pinout.h, queue.h,
       RampsStepper.h, RobotGeometry.h, servo_gripper.h
+
   Se hicieron cambios menores, sin registrarlos.
 
 * Archivos STL agregados o actualizados:
