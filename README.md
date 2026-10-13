@@ -21,7 +21,7 @@ Cambios:
   - Agregado de Control de Limites del Espacio de Trabajo previos a la
     ejecución de los desplazamientos (uso de planificador).
         
-* Version V1.0 (10Oct2026)
+* Version V1.0 (10-Oct-2026)
   - Adaptada para usar un tipo de Gripper basico, para sostener lapiz,
     basado en un Servo 28BYJ-48 modificado para operar como bipolar.
     Luego de un tiempo de mínima actividad por otras obligaciones,
