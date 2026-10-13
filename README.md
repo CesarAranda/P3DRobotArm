@@ -13,8 +13,7 @@ Hardware:
 
 Firmware:
 * Version V1.1 (en desarrollo)
-  - Adaptada para usar un tipo de Gripper con sensores de presion
-    basado en un Servo 28BYJ-48 modificado para operar como bipolar.
+  - Adaptada para usar un tipo de Gripper con sensores de presion.
 Cambios:
   - Agregado de módulo/entidad separada para realizar el control del
     Gripper Sensible a Presión.
@@ -23,7 +22,7 @@ Cambios:
         
 * Version V1.0 (10-Oct-2026)
   - Adaptada para funcionar con Gripper controlado por un motor28BYJ-48
-    modificado para operar como bipolar.
+    modificado para operar como bipolar mediante A4988.
     Luego de un tiempo de mínima actividad por otras obligaciones,
     en 2026 se retoma el proyecto y se lanza la version 1.0 de producción.
 
