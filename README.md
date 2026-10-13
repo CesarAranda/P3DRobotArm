@@ -22,8 +22,8 @@ Cambios:
     ejecución de los desplazamientos (uso de planificador).
         
 * Version V1.0 (10-Oct-2026)
-  - Adaptada para usar un tipo de Gripper basico, para sostener lapiz,
-    basado en un Servo 28BYJ-48 modificado para operar como bipolar.
+  - Adaptada para funcionar con Gripper controlado por un motor28BYJ-48
+    modificado para operar como bipolar.
     Luego de un tiempo de mínima actividad por otras obligaciones,
     en 2026 se retoma el proyecto y se lanza la version 1.0 de producción.
 
