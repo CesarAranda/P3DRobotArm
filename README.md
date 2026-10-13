@@ -2,7 +2,7 @@
 Proyecto educativo de un Brazo Robot con impresora 3D
 por Cesar Aranda (Puma3D)
 
-Más información: http://www.thingiverse.com/thing:
+Más información: https://www.thingiverse.com/thing:7416969
 
 Hardware:
   Modificación del trabajo de Florin Tobler [ftobler]
