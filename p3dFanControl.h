@@ -1,0 +1,19 @@
+#ifndef FANCONTROL_H_
+#define FANCONTROL_H_
+
+class FanControl {
+public:
+  FanControl(int aPin, int aFanDelay);
+  void enable(bool value = true);
+  void disable();
+  bool getState();
+  void update();
+private:
+  bool state;
+  int pin;
+  long fan_delay;
+  unsigned long nextShutdown;
+  bool installed;
+};
+
+#endif
