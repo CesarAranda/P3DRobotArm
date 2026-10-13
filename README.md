@@ -7,6 +7,7 @@ Más información: https://www.thingiverse.com/thing:7416969
 Hardware:
   Modificación del trabajo de Florin Tobler [ftobler]
   (info http://www.thingiverse.com/thing:1718984)
+  
   Con ideas tomadas de Francis Ng [Francis128]
   (info http://www.thingiverse.com/thing:2040526)
 
