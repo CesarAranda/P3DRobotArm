@@ -1,7 +1,7 @@
 # Puma 3D Robot Arm
-
 Proyecto educativo de un Brazo Robot con impresora 3D
-por Cesar Aranda [Puma3D]
+por Cesar Aranda (Puma3D)
+
 Más información: http://www.thingiverse.com/thing:
 
 Hardware:
@@ -11,13 +11,13 @@ Hardware:
   (info http://www.thingiverse.com/thing:2040526)
 
 Firmware:
-* Version V1.1 (02Nov2026)
+* Version V1.1 (en desarrollo)
   - Adaptada para usar un tipo de Gripper con sensores de presion
     basado en un Servo 28BYJ-48 modificado para operar como bipolar.
 Cambios:
   - Agregado de módulo/entidad separada para realizar el control del
     Gripper Sensible a Presión.
-- Agregado de Control de Limites del Espacio de Trabajo previos a la
+  - Agregado de Control de Limites del Espacio de Trabajo previos a la
     ejecución de los desplazamientos (uso de planificador).
         
 * Version V1.0 (10Oct2026)
