@@ -14,6 +14,7 @@ Hardware:
 
 Firmware:
 * Version V1.1 (en desarrollo)
+
 Cambios:
   - Funciones para realizar el control del Gripper Sensible a Presión.
   - Homing automático de la pinza, luego del agregado de un final de carrera
@@ -22,9 +23,8 @@ Cambios:
   - Controles adicionales para código más robusto (por reutilización de entidades).
         
 * Version V1.0 (10-Oct-2026)
-  - Funciona con Gripper controlado por un motor28BYJ-48 (bipolar) y A4988.
-    Luego de un tiempo de mínima actividad por otras obligaciones,
-    en 2026 se retoma el proyecto y se lanza la version 1.0 de producción.
+  - Luego de un tiempo de mínima actividad por otras obligaciones,
+    en 2026 se retoma el proyecto y se publica la version 1.0 de producción.
 
   Cambios:
   - Estandarización de nombres de entidades (camelCase).
@@ -33,14 +33,13 @@ Cambios:
     a esta implementación particular.
     Cambio de nombres en los archivos para evitar confusiones,
     si bien, algunos módulos coinciden con los originales.
-  - Eliminación del Modo de funcionamiento "Simulation". 
-    Desarrollo de aplicativo independiente para realizar las tareas
+  - Eliminación del Modo de funcionamiento "Simulation".
+  - Desarrollo de aplicativo independiente para realizar las tareas
     asociadas a prototipos de Interfaces de Usuario de Control
     sin necesidad de tener el hardware montado, compatible con este 
     firmware.
-  - Agregado de funciones para apertura/cierre variables del gripper
-    controlado mediante A4988.
   - Redefinicion de la clase gripper.
+  - Funciones para apertura variable de la pinza.
   - Procedimiento manual para Homing de la pinza.
   - Control de disponibilidad para permitir activación/desactivación de
     dispositivos complementarios (fan, pump, laser, led). 
@@ -49,15 +48,21 @@ Cambios:
   - Agregado de servicios adicionales para homing (lower shank, upper shank, rotate base)
   - Sólo se deja código para la implementación con Arduino MEGA 2560
   - Si bien no se implementa montaje con Rail, se deja las instrucciones
-    asociadas, por si se agregara a futuro
-  - Reemplazo de respuesta OK , por identificación de comando específico ejecutado
-  - Para el control de la respuesta anterior se cambia al mecanismo de LOGGER
+    asociadas, por si se decide usarlo a futuro.
+  - Reemplazo de respuestas simples del tipo OK al ejecutar un comando.
+  - Para la salida de toda respuesta se unifica el uso de LOGGER.
   - Cada pseudo método definido en command.h se mueve como miembro a la clase correspondiente.
   - Unificación de los mensajes de salida de activación a enabled/disabled.
+  - Cambio de nombres de las funciones asociadas a las articulaciones/brazos 
+    (Lower/Upper/Rotate), dejando X/Y/Z para casos de movimientos axiales en esas direcciones.
+  - Se modifica el uso de variables con nombres tradicionales de los pines en la placa Mega,
+    a nombres propios de esta implementación de robot. 
 
 * Version V0.9 (07-Oct-2024)
-  - Adaptada para usar un tipo de Gripper basico, para sostener lapiz,
-    basado en un Servo 28BYJ-48 modificado para operar como bipolar.
+  - Uso de Gripper controlado por un motor28BYJ-48 (como bipolar) y driver A4988.
+  - Si bien se diseña una pinza mejorada, no se incluye en esta versión,
+  - Sólo se usa un tipo de Gripper basico, para sostener lapiz.
+  
   Cambios:
   - Agregado de un Modo de funcionamiento "Simulation" para usar el
     firmware en tareas de desarrollo de Interfaces de Usuario de Control
