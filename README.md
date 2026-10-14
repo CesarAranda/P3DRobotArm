@@ -5,17 +5,15 @@ por Cesar Aranda (Puma3D)
 Más información: https://www.thingiverse.com/thing:7416969
 
 Hardware:
-
-  Modificación del trabajo de Florin Tobler [ftobler]
-  (info http://www.thingiverse.com/thing:1718984)
-  
-  Con ideas tomadas de Francis Ng [Francis128]
-  (info http://www.thingiverse.com/thing:2040526)
+  - Modificación del trabajo de Florin Tobler [ftobler]
+    (info http://www.thingiverse.com/thing:1718984)
+  - Ideas adicionales del software tomadas de Francis Ng [Francis128]
+    (info http://www.thingiverse.com/thing:2040526)
 
 Firmware:
 * Version V1.1 (en desarrollo)
 
-Cambios:
+  Cambios:
   - Funciones para realizar el control del Gripper Sensible a Presión.
   - Homing automático de la pinza, luego del agregado de un final de carrera
   - Agregado de Control de Limites del Espacio de Trabajo previos a la
@@ -80,7 +78,7 @@ Cambios:
 
   Se hicieron cambios menores, sin registrarlos.
 
-* Archivos STL agregados o actualizados:
+* Archivos STL agregados o actualizados respecto de las versiones originales:
   - Bandeja interna central para guía de cables 
   - Bandeja de cola para guía de cables 
   - Final de carrera en Eje Z
