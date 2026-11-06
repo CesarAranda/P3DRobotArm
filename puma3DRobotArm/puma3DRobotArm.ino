@@ -85,6 +85,7 @@ void setStepperEnable(bool enable){
 void homeSequence(){
   setStepperEnable(false);
   fan.enable(true);
+  Logger::logINFO("HOMING"); 
   if (!LOW_HOME_STEPPER || !HIG_HOME_STEPPER){
     setStepperEnable(true);
     endStopLower.homeOffset(!LOW_INVERSE_STEPPER);
@@ -106,6 +107,7 @@ void homeSequence(){
       endStopRail.home(!RAI_INVERSE_STEPPER); //
     }
   }
+  // next!! add gripper
   if((LOW_HOME_STEPPER and endStopLower.checkDelay())
     or (HIG_HOME_STEPPER and endStopHigher.checkDelay())
     or (ROT_HOME_STEPPER and endStopRotate.checkDelay())
@@ -142,27 +144,24 @@ void executeCommand(Cmd cmd) {
       case 4: 
         p3dCommand.dWwell(cmd); 
         break;
-
       case 26:
       // Homing sequence for Lower Shank
-        setStepperEnable(false);
-        if (HIG_HOME_STEPPER){
-          stepperHigher.enable(true);
-          endStopHigher.home(!HIG_INVERSE_STEPPER); //INDICATE STEPPER HOMING DIRECTION
-        }
-        Logger::logINFO("HOMING LOWER SHANK COMPLETE");
-        break;
-
-      case 27:
-        // Homing sequence for Upper Shank
         setStepperEnable(false);
         if (LOW_HOME_STEPPER){
           stepperLower.enable(true);
           endStopLower.home(!LOW_INVERSE_STEPPER); //INDICATE STEPPER HOMING DIRECTION
         }
+        Logger::logINFO("HOMING LOWER SHANK COMPLETE");
+        break;
+      case 27:
+        // Homing sequence for Upper Shank
+        setStepperEnable(false);
+        if (HIG_HOME_STEPPER){
+          stepperHigher.enable(true);
+          endStopHigher.home(!HIG_INVERSE_STEPPER); //INDICATE STEPPER HOMING DIRECTION
+        }
         Logger::logINFO("HOMING UPPER SHANK COMPLETE");
         break;
-
       case 28:
         // Homing sequence for all Shanks
         homeSequence();

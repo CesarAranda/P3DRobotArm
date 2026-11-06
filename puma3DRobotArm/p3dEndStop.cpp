@@ -29,23 +29,9 @@ void Endstop::home(bool dir) {
   // analiza si en un tiempo dado los endstops cambian de estado
   // si no: fallo electromecanico
   bCheckDelay = false;
-  /*long cDelay = 0;
-  // en v51 
-  bState = digitalRead(min_pin);
-  while (bState != switch_input) {
-    digitalWrite(step_pin, HIGH);
-    digitalWrite(step_pin, LOW);
-    delayMicroseconds(home_dwell);
-    bState = digitalRead(min_pin);
-    cDelay += home_dwell;
-    if(cDelay/1000000 > check_delay and bState != switch_input){
-      bCheckDelay = true;
-      break;
-    }
-  }
-  homeOffset(dir);
-*/
-/*  bState = !(digitalRead(min_pin) ^ switch_input);
+  long cDelay = 0;
+
+  bState = !(digitalRead(min_pin) ^ switch_input);
   while (!bState) {
     digitalWrite(step_pin, HIGH);
     digitalWrite(step_pin, LOW);
@@ -58,7 +44,6 @@ void Endstop::home(bool dir) {
     }
   }
   homeOffset(dir);
-  */
 }
 
 void Endstop::homeOffset(bool dir){
