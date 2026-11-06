@@ -1,5 +1,5 @@
 # Puma 3D Robot Arm
-Proyecto educativo de un Brazo Robot con impresora 3D
+Proyecto educativo de un Brazo Robot impreso 3D en ABS
 por Cesar Aranda (Puma3D)
 
 Más información: https://www.thingiverse.com/thing:7416969
@@ -32,10 +32,6 @@ Firmware:
     Cambio de nombres en los archivos para evitar confusiones,
     si bien, algunos módulos coinciden con los originales.
   - Eliminación del Modo de funcionamiento "Simulation".
-  - Desarrollo de aplicativo independiente para realizar las tareas
-    asociadas a prototipos de Interfaces de Usuario de Control
-    sin necesidad de tener el hardware montado, compatible con este 
-    firmware.
   - Redefinicion de la clase gripper.
   - Funciones para apertura variable de la pinza.
   - Procedimiento manual para Homing de la pinza.
@@ -52,9 +48,12 @@ Firmware:
   - Cada pseudo método definido en command.h se mueve como miembro a la clase correspondiente.
   - Unificación de los mensajes de salida de activación a enabled/disabled.
   - Cambio de nombres de las funciones asociadas a las articulaciones/brazos 
-    (Lower/Upper/Rotate), dejando X/Y/Z para casos de movimientos axiales en esas direcciones.
+    (Upper/Lower/Rotate), dejando X/Y/Z para casos de movimientos axiales en esas direcciones.
   - Se modifica el uso de variables con nombres tradicionales de los pines en la placa Mega,
-    a nombres propios de esta implementación de robot. 
+    a nombres propios de esta implementación de robot.
+  - Aplicativo independiente para realizar las tareas asociadas a prototipos de Interfaces
+    de Usuario de Control sin necesidad de tener el hardware montado, compatible con este 
+    firmware.
 
 * Version V0.9 (07-Oct-2024)
   - Uso de Gripper controlado por un motor28BYJ-48 (como bipolar) y driver A4988.
