@@ -85,7 +85,7 @@ void setStepperEnable(bool enable){
 void homeSequence(){
   setStepperEnable(false);
   fan.enable(true);
-  Logger::logINFO("HOMING"); 
+  //Logger::logINFO("HOMING"); 
   if (!LOW_HOME_STEPPER || !HIG_HOME_STEPPER){
     setStepperEnable(true);
     endStopLower.homeOffset(!LOW_INVERSE_STEPPER);
@@ -134,6 +134,7 @@ void executeCommand(Cmd cmd) {
       // Effector movement
       case 0:
       case 1:
+        // Procesar si existe homing
         fan.enable(true);
         Point posoffset;
         posoffset = interpolator.getPosOffset();      
@@ -142,6 +143,7 @@ void executeCommand(Cmd cmd) {
         Logger::logINFO("LINEAR MOVE: [X:" + String(cmd.valueX-posoffset.xmm) + " Y:" + String(cmd.valueY-posoffset.ymm) + " Z:" + String(cmd.valueZ-posoffset.zmm) + " R:" + String(cmd.valueR-posoffset.rmm) + "]");
         break;
       case 4: 
+        // Change acceleration/speed ramp
         p3dCommand.dWwell(cmd); 
         break;
       case 26:
@@ -165,7 +167,6 @@ void executeCommand(Cmd cmd) {
       case 28:
         // Homing sequence for all Shanks
         homeSequence();
-        Logger::logINFO("HOMING COMPLETE");
         break;
       case 90:
         // Absolute coordinate mode
@@ -188,82 +189,21 @@ void executeCommand(Cmd cmd) {
   else
   if (cmd.id == 'M') {
     switch (cmd.num) {
-      case 1:
-        // Enable pump
-        if (PUMP == 0){
-          Logger::logINFO("PUMP NOT AVAILABLE");
-        }else{
-          if (pump.getState()) {
-            Logger::logINFO("PUMP IS READY ENABLED");  
-          } else {
-            pump.on(); 
+      case 2: 
+        // Select gripper type
+        if (GRIPPER == 0){
+          Logger::logERROR("GRIPPER NOT AVAILABLE");
+        } else
+          if (GRIPPER < 3){
+            Logger::logINFO("GRIPPER TYPE COMMAND INVALID FOR THIS GRIPPER TYPE");
+          } else{
+              gripper.setType(cmd.valueS);
           }
-        }   
-        break;
-      case 2:
-        // Disable pump 
-        if (PUMP == 0){
-          Logger::logINFO("PUMP NOT AVAILABLE");
-        }else{
-          if (!pump.getState()) {
-            Logger::logINFO("PUMP IS READY DISABLED");  
-          } else {
-            pump.off(); 
-          }
-        }   
-        break;
-      case 6:
-        // Enable laser 
-        if (LASER == 0){
-          Logger::logINFO("LASER NOT AVAILABLE");
-        }else{
-          if (laser.getState()) {
-            Logger::logINFO("LASER IS READY ENABLED");  
-          } else {
-            laser.on(); 
-          }
-        }   
-        break;
-      case 7:
-        // Disable laser 
-        if (LASER == 0){
-          Logger::logINFO("LASER NOT AVAILABLE");
-        }else{
-          if (!laser.getState()) {
-            Logger::logINFO("LASER IS READY DISABLED");  
-          } else {
-            laser.off(); 
-          }
-        }   
-        break;
-      case 8:
-        // Enable LED   
-        if (LED == 0){
-          Logger::logINFO("LED NOT AVAILABLE");
-        }else{
-          if (led.getState()) {
-            Logger::logINFO("LED IS READY ENABLED");  
-          } else {
-            led.on();
-          }
-        }   
-        break;
-      case 9:
-        // Disable LED  
-        if (LED == 0){
-          Logger::logINFO("LED NOT AVAILABLE");
-        }else{
-          if (!led.getState()) {
-            Logger::logINFO("LED IS READY DISABLED");  
-          } else {
-            led.off();
-          }
-        }   
-        break;
-      case 10:
+        break;      
+      case 3:
         // Enable gripper 
         if (GRIPPER == 0){
-          Logger::logINFO("GRIPPER NOT AVAILABLE");
+          Logger::logERROR("GRIPPER NOT AVAILABLE");
         } else{
           if (gripper.getState()) {
             Logger::logINFO("GRIPPER IS READY ENABLED");  
@@ -272,33 +212,10 @@ void executeCommand(Cmd cmd) {
           }
         }
         break;
-      case 11:
-        // Disable gripper
-        if (GRIPPER == 0){
-          Logger::logINFO("GRIPPER NOT AVAILABLE");
-        } else{
-          if (!gripper.getState()) {
-            Logger::logINFO("GRIPPER IS READY DISABLED");  
-          } else {
-            gripper.off();
-          }
-        }
-        break;
-      case 12: 
-        // Select gripper type
-        if (GRIPPER == 0){
-          Logger::logINFO("GRIPPER NOT AVAILABLE");
-        } else
-          if (GRIPPER < 3){
-            Logger::logINFO("GRIPPER TYPE COMMAND INVALID FOR THIS GRIPPER TYPE");
-          } else{
-              gripper.setType(cmd.valueS);
-          }
-        break;
-      case 13:
+      case 4:
           // Open gripper to absolute position
         if (GRIPPER == 0){
-          Logger::logINFO("GRIPPER NOT AVAILABLE");
+          Logger::logERROR("GRIPPER NOT AVAILABLE");
         } else
           if (GRIPPER < 3){
             Logger::logINFO("GRIPPER MOVE COMMAND INVALID FOR THIS GRIPPER TYPE");
@@ -310,25 +227,82 @@ void executeCommand(Cmd cmd) {
             }
           }
         break;
-      case 14:
-        // Open gripper to relative position 
+      case 5:
+        // Disable gripper
         if (GRIPPER == 0){
-          Logger::logINFO("GRIPPER NOT AVAILABLE");
-        } else
-          if (GRIPPER < 3){
-            Logger::logINFO("GRIPPER MOVE COMMAND INVALID FOR THIS GRIPPER TYPE");
-          } else{
+          Logger::logERROR("GRIPPER NOT AVAILABLE");
+        } else{
           if (!gripper.getState()) {
-            Logger::logINFO("GRIPPER IS DISABLED");  
-            } else{
-              gripper.openRelative(cmd.valueS);
-            }
+            Logger::logINFO("GRIPPER IS READY DISABLED");  
+          } else {
+            gripper.off();
           }
+        }
         break;
-      case 15:
+      case 6:
+        // Change Tool
+        Logger::logERROR("COMMAND CHANGE TOOL NOT IMPLEMENTED");
+        break;
+      case 17:
+        // Enable stepper motors  
+        setStepperEnable(true);
+        break;
+      case 18: 
+        // Disable stepper motors
+        setStepperEnable(false);
+        break;
+      case 20:
+        // Enable pump
+        if (PUMP == 0){
+          Logger::logERROR("PUMP NOT AVAILABLE");
+        }else{
+          if (pump.getState()) {
+            Logger::logINFO("PUMP IS READY ENABLED");  
+          } else {
+            pump.on(); 
+          }
+        }   
+        break;
+      case 21:
+        // Disable pump 
+        if (PUMP == 0){
+          Logger::logERROR("PUMP NOT AVAILABLE");
+        }else{
+          if (!pump.getState()) {
+            Logger::logINFO("PUMP IS READY DISABLED");  
+          } else {
+            pump.off(); 
+          }
+        }   
+        break;
+      case 23:
+        // Enable laser 
+        if (LASER == 0){
+          Logger::logERROR("LASER NOT AVAILABLE");
+        }else{
+          if (laser.getState()) {
+            Logger::logINFO("LASER IS READY ENABLED");  
+          } else {
+            laser.on(); 
+          }
+        }   
+        break;
+      case 24:
+        // Disable laser 
+        if (LASER == 0){
+          Logger::logERROR("LASER NOT AVAILABLE");
+        }else{
+          if (!laser.getState()) {
+            Logger::logINFO("LASER IS READY DISABLED");  
+          } else {
+            laser.off(); 
+          }
+        }   
+        break;
+      case 44:
         // Homing gripper manual = Closed [Opening = 0mm]   
         if (GRIPPER == 0){
-          Logger::logINFO("GRIPPER NOT AVAILABLE");
+          Logger::logERROR("GRIPPER NOT AVAILABLE");
         } else
           if (GRIPPER < 3){
             Logger::logINFO("GRIPPER MOVE COMMAND INVALID FOR THIS GRIPPER TYPE");
@@ -340,18 +314,10 @@ void executeCommand(Cmd cmd) {
             }
           }
         break;
-      case 17:
-        // Enable stepper motors  
-        setStepperEnable(true);
-        break;
-      case 18: 
-        // Disable stepper motors
-        setStepperEnable(false);
-        break;
       case 106:
         // Enable fan    
         if (FAN == 0){
-          Logger::logINFO("FAN NOT AVAILABLE");
+          Logger::logERROR("FAN NOT AVAILABLE");
         } else{ 
           fan.enable(true);
         }
@@ -359,10 +325,34 @@ void executeCommand(Cmd cmd) {
       case 107:
         // Disable fan
         if (FAN == 0){
-          Logger::logINFO("FAN NOT AVAILABLE");
+          Logger::logERROR("FAN NOT AVAILABLE");
         } else{       
           fan.enable(false);
         }
+        break;
+      case 108:
+        // Enable LED   
+        if (LED == 0){
+          Logger::logERROR("LED NOT AVAILABLE");
+        }else{
+          if (led.getState()) {
+            Logger::logINFO("LED IS READY ENABLED");  
+          } else {
+            led.on();
+          }
+        }   
+        break;
+      case 109:
+        // Disable LED  
+        if (LED == 0){
+          Logger::logERROR("LED NOT AVAILABLE");
+        }else{
+          if (!led.getState()) {
+            Logger::logINFO("LED IS READY DISABLED");  
+          } else {
+            led.off();
+          }
+        }   
         break;
       case 114:
         // Return the current positions of all axis and other info
@@ -455,6 +445,9 @@ void loop() {
     cmdCurrent = queue.pop();
     executeCommand(cmdCurrent);
     //Logger::logINFO("EXECUTED: command "+ String(cmdCurrent.id) + String(cmdCurrent.num) );
+    if (PRINT_REPLY) {
+      Serial.println(PRINT_REPLY_MSG);
+    }
   }
   
   if(LED){
