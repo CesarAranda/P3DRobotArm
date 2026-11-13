@@ -47,12 +47,14 @@
 
 // Cantidad de pasos por movimiento
 int pasos = 500;
-int pasos_pinza = 44;
+int pasos_mm = 44;
 /* El 48BYJ-18 realiza 4096 pasos para ejecutar 1 vuelta, con 1/2 micropaso.
   En la práctica, la pinza mejorada tiene una apertura de 44/45mm
   cuando se usa el diente jaw_1 y el avance es de 0.02273 mm/paso.
   Se adopta 44 pasos/mm. Se requieren 1936 pasos para abrir/cerrar la pinza).
 */
+int mm = 3;  // util para verificar aperturas
+int pasos_pinza = mm * pasos_mm;
 
 // Velocidad: mayor valor = más lento
 int velocidad = 1000;
@@ -65,7 +67,7 @@ void menu() {
   Serial.println("Motor Lower  :  l = adelante    / L = atras");
   Serial.println("Motor Higher :  h = atras / H = adelante");
   Serial.println("Motor Rotate :  r = antihora/izquierda/ R = hora/derecha");
-  Serial.println("Motor Gripper:  p = abrir    / P = cerrar");
+  Serial.println("Motor Gripper:  g = abrir    / G = cerrar [" + String(mm) +" mm]");
   Serial.println("Probar Lower + Higer + Rotate :  a");
   Serial.println("Leer MIN FdC :  f");
   Serial.println("Desactivar motores:  s");
